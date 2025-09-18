@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Plants</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://img.freepik.com/free-photo/texture-background-with-different-exotic-leaves-generative-al_169016-28564.jpg?semt=ais_incoming&w=740&q=80') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 30px;
+            font-weight: 700;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 50px auto;
+            background-color: rgba(0,0,0,0.7);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        /* Home/back button */
+        .back-home {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: rgba(0,150,136,0.85);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .back-home:hover {
+            background-color: rgba(0,105,92,0.9);
+        }
+
+        a.add-plant {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: rgba(0,150,136,0.85);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        a.add-plant:hover {
+            background-color: rgba(0,105,92,0.9);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #fff;
+        }
+
+        th {
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        td {
+            background-color: rgba(0,0,0,0.6);
+        }
+
+        /* Make photo cell larger */
+        .photo-cell {
+            width: 150px;
+            height: 150px;
+        }
+
+        .photo-cell img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        a.info-link {
+            color: #00e5ff;
+            text-decoration: none;
+        }
+
+        a.info-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a th:href="@{/}" class="back-home">&#8592; Home</a>
+        <h2>Plants</h2>
+        <a th:href="@{/plants/add}" class="add-plant">Add Plant</a>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Photo</th>
+                <th>Info</th>
+            </tr>
+            <tr th:each="p : ${plants}">
+                <td th:text="${p.id}"></td>
+                <td th:text="${p.name}"></td>
+                <td th:text="${p.description}"></td>
+                <td class="photo-cell">
+                    <img th:src="${p.photoUrl}" alt="photo"/>
+                </td>
+                <td><a th:href="${p.infoLink}" class="info-link" th:text="${p.infoLink}"></a></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
